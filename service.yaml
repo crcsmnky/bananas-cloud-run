@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: bananas-knative
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: gcr.io/sndp-next-19/bananas-cloud-run
+            env:
+              - name: PLATFORM
+                value: "Knative"
