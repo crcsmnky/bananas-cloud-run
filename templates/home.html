@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Bananas for {{ platform }}</title>
+    <style type="text/css">
+        .row {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="jumbotron">
+            <h1 class="display4" align="center">Bananas for {{ platform }}</h1>
+            <p class="lead" align="center">Welcome {{ welcome }}!</p>
+        </div>            
+
+        <div class="row">
+            <div class="col">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for c, m in messages %}
+                            <div class="alert alert-{{ c }}" role="alert">
+                                {{ m }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        
+        {% if labels %}
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h2 align="center">Let's see what we found</h2>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <img src="{{ imagesrc }}" class="img-thumbnail mx-auto d-block" alt="bananas?">
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Label</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Topicality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for l in labels %}
+                                <tr>
+                                    <td>{{ l.description }}</td>
+                                    <td>{{ l.score }}</td>
+                                    <td>{{ l.topicality }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <hr>
+        {% endif %}
+    
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2>Upload an image to see if it's got a banana in there!</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form class="form-inline" action="/" enctype="multipart/form-data" method="POST">
+                    <input type="file" name="image">
+                    <button class="btn btn-primary" type="submit">Upload!</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
