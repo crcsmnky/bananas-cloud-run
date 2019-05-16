@@ -14,7 +14,7 @@ app.secret_key = 'a341056a4bc4ce3d0ae8d303a244fa46'
 app.config.update({
     'PLATFORM': os.environ.get('PLATFORM', 'Cloud'),
     'WELCOME': os.environ.get('WELCOME', 'GDG Cloud Austin'),
-    'BUCKET': os.environ.get('BUCKET', 'sndp-bananas')
+    'BUCKET': os.environ.get('BUCKET', '[BUCKET_NAME]')
 })
 
 EXTENSIONS = set(['png', 'gif', 'jpg', 'tiff'])
